@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Admin Developer | StudentFinance{% endblock %}
+{% block content %}<header class="page-heading"><h1>Admin developer</h1><p>Kelola dan pantau akun yang terdaftar di aplikasi.</p></header><section class="panel"><div class="panel-heading"><h2>Daftar pengguna</h2><span class="badge">{{ users|length }} akun</span></div><div class="table-wrap"><table><thead><tr><th>Username</th><th>Role</th><th>Dibuat</th></tr></thead><tbody>{% for user in users %}<tr><td><strong>{{ user['username'] }}</strong></td><td><span class="badge {{ 'expense' if user['role'] == 'admin' else '' }}">{{ user['role'] }}</span></td><td>{{ user['created_at'] }}</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}

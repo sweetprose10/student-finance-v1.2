@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk | StudentFinance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="login-page">
+    <section class="login-card">
+        <a class="brand" href="#"><span class="brand-mark">↗</span> StudentFinance</a>
+        <h1>Kelola uang dengan tenang.</h1>
+        <p>Masuk atau buat akun baru untuk mulai mengatur keuanganmu.</p>
+        {% if error %}<div class="flash error">{{ error }}</div>{% endif %}
+        <form class="login-form" method="POST">
+            <div class="form-field"><label for="username">Username</label><input id="username" name="username" placeholder="Masukkan username" required autofocus></div>
+            <div class="form-field"><label for="password">Password</label><input id="password" type="password" name="password" placeholder="Masukkan password" required></div>
+            <button type="submit">Masuk ke dashboard →</button>
+        </form>
+        {% if google_enabled %}<a class="btn google-button" href="{{ url_for('google_login') }}">Masuk dengan Google</a>{% endif %}
+        <a class="btn secondary full-button" href="{{ url_for('daftar') }}">Buat akun baru</a>
+    </section>
+</main>
+</body>
+</html>

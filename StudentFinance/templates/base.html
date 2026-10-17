@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StudentFinance{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">↗</span> StudentFinance</a>
+        <p class="eyebrow">Menu utama</p>
+        <nav>
+            <ul class="nav-list">
+                <li><a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span> Ringkasan</a></li>
+                <li><a class="nav-link {% if request.endpoint == 'pemasukan' %}active{% endif %}" href="{{ url_for('pemasukan') }}"><span class="nav-icon">↗</span> Pemasukan</a></li>
+                <li><a class="nav-link {% if request.endpoint == 'pengeluaran' %}active{% endif %}" href="{{ url_for('pengeluaran') }}"><span class="nav-icon">↘</span> Pengeluaran</a></li>
+                <li><a class="nav-link {% if request.endpoint == 'statistik' %}active{% endif %}" href="{{ url_for('statistik') }}"><span class="nav-icon">▥</span> Statistik</a></li>
+                <li><a class="nav-link {% if request.endpoint == 'wishlist' %}active{% endif %}" href="{{ url_for('wishlist') }}"><span class="nav-icon">☆</span> Wishlist</a></li>
+                <li><a class="nav-link {% if request.endpoint == 'target' %}active{% endif %}" href="{{ url_for('target') }}"><span class="nav-icon">◎</span> Target</a></li>
+                {% if session.get('role') == 'admin' %}<li><a class="nav-link {% if request.endpoint == 'developer_admin' %}active{% endif %}" href="{{ url_for('developer_admin') }}"><span class="nav-icon">◆</span> Admin developer</a></li>{% endif %}
+            </ul>
+        </nav>
+        <div class="sidebar-footer">Keuangan lebih terarah,<br>keputusan lebih tenang.<br><a class="logout-link" href="{{ url_for('profil') }}">Profil akun →</a></div>
+    </aside>
+    <main class="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</div>
+</body>
+</html>
